@@ -29,7 +29,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        writePreferences()
+
     }
+
+    private fun writePreferences(){
+
+        binding.btn.setOnClickListener {
+
+            // Edite Text
+            val text = binding.edt.text.toString()
+
+            //write
+            lifecycleScope.launch {
+
+                dataStore.edit { hi ->
+                    hi[sharedKey] = text
+                }
+
+            }
+
+        }
+
+    }
+
+
 
 }
 
