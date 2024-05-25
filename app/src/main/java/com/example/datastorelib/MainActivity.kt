@@ -47,13 +47,31 @@ class MainActivity : AppCompatActivity() {
                     hi[sharedKey] = text
                 }
 
+                readPreferences()
+
             }
 
         }
 
     }
 
+    private fun readPreferences(){
 
+        //read
+        val exampleCounterFlow = this.dataStore.data.map { preferences ->
+            preferences[sharedKey] ?: "null"
+        }
+
+        lifecycleScope.launch {
+
+            //Read
+            exampleCounterFlow.collect{
+                binding.txt.text = it
+            }
+
+        }
+
+    }
 
 }
 
